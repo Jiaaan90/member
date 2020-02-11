@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}<title>회원정보</title>{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+    .registration {
+        width: 360px;
+        margin: 0 auto;
+        margin-top : 100px;
+    }
+    p {
+        text-align: center;
+    }
+    #logo{
+        font-weight: bold;
+        font-size: x-large; 
+        color: #337AB7; 
+    }
+    label {
+        width: 50%;
+        text-align: left;
+    }
+    .control-label {
+        width: 100%;
+    }
+    .panel-body  button {
+        width: 100%;
+        margin-top: 10px;
+    }
+</style>
+{% endblock css %}
+
+<!--{% load staticfiles %}-->
+{% block content %}
+<div class="panel panel-default registration">
+    <div class="panel-heading">
+        <p id="logo">Linuxwares</p>
+    </div>
+    <div class="panel-body">
+        <form action="." method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group {% if field.errors|length > 0 %}has-error{%endif %}">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <input name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form-control" type="{{ field.field.widget.input_type }}" value="{{ field.value|default_if_none:'' }}">
+                    {% for error in field.errors %}
+                        <label class="control-label" for="{{ field.id_for_label }}">{{ error }}</label>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="form-actions">
+                <button class="btn btn-primary btn-large" type="submit">정 보 수 정</button><br>
+            </div>
+        </form>
+        <button class="btn btn-primary btn-large" onclick="location.href='/accounts/login'">회 원 탈 퇴</button>
+    </div>
+</div>
+{% endblock content %}

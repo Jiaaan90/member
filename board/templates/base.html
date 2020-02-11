@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        {% block title %}      <!-- 페이지별 타이틀 공간 -->
+        <title>board - member</title>
+        {% endblock title %}
+
+        {% block meta %}    <!-- 페이지별 메타 데이터 공간 -->
+        {% endblock meta %}
+
+        {% block scripts %}    <!-- 페이지별 스크립트 공간 -->
+        {% endblock scripts %}
+
+        {% block css %}        <!-- 페이지별 css -->
+        {% endblock css %}
+    </head>
+    <body>
+        {% block header %}
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="/accounts/login/" style="text-decoration: none;"><p style="font-size:x-large; font-weight: bold; line-height: 50px;">Linuxwares</p></a>
+                <!--    <a class="navbar-brand" href="/article/">게시글 목록</a>-->
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a style="font-size:15px; font-weight: bold; color: #337AB7" href="/article/">게시글</a>
+                        </li>
+                        {% if not request.user.is_authenticated %}
+                        <li>
+                            <a href="/accounts/create/" style="font-size:15px; font-weight: bold; color: #337AB7">가입하기</a>
+                        </li>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <li>
+                            <a href="/accounts/logout/" style="font-size:15px; font-weight: bold; color: #337AB7">로그아웃</a>
+                        </li>   
+                        <li>              
+                            <a href="/accounts/update/" style="font-size:15px; font-weight: bold; color: #337AB7">마이페이지</a>
+                        </li>    
+                        {% else %}
+                        <li>    
+                            <a href="/accounts/login/" style="font-size:15px; font-weight: bold; color: #337AB7">로그인</a>
+                        {% endif %} 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+              {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endblock header %}
+        
+    {% block content %}
+    view: {{ view }} <!-- ctx['view'] -->
+    <br>
+    data: {{ data }}  <!-- ctx['data'] -->
+    {% endblock content %}
+    </body>
+</html>

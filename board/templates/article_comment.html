@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>댓 글 쓰 기</title>{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+	.wrap_comment{
+		width: 700px;
+        margin: auto;
+        margin-top: 100px;
+    }
+	.btn{
+		float: right;
+	}
+	th{
+		text-align: center;
+	}
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="wrap_comment">
+    <div id="comment">
+        {% for comment in post.comments.all %}
+        <div class="comment-list">
+            <a href="#">{{ comment.author }}</a>
+            <small>{{ comment.created_date }}</small>
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+        {% empty %}
+        <div class="comment-list">
+            <div class="alert alert-info">작성 된 댓글이 없습니다.</div>
+        </div>
+        {% endfor %}
+        </div>
+        {% if request.user.is_active %}
+        <form action="." method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary btn-xs" type="submit">댓 글 작 성</button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning">로그인된 사용자만 댓글을 작성할 수 있습니다.</div>
+        {% endif %} 	
+</div>
+{% endblock content %}

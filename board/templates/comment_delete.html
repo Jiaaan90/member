@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>게시글 상세 - {{ article.pk }}. {{ article.title }}</title>{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+    .wrapper{
+        margin: auto;
+        width: 700px;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+<!--진짜 지울건지 확인을 받아야 한다. form을 또 보여줄 필요가 없다.-->
+<div class="wrapper">
+    <div class="alert alert-danger" style="text-align: center;">정말 삭제하시겠습니까?</div>
+    <form action="" method ="post">
+        {% csrf_token %}
+        <button type="submit" class ="btn btn-danger btn-xs" style="float: right;">댓 글 삭 제</button>
+    </form>
+</div>
+{% endblock %}

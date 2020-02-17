@@ -43,21 +43,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('email', unique=True)
     name = models.CharField('이름', max_length=30, blank=True)
     is_staff = models.BooleanField('스태프 권한', default=False)
-    phone = models.CharField('핸드폰 번호', max_length=140, null=True)
-    birth_date = models.DateField('생일 ()', blank=True, null=True)
+    phone = models.CharField('핸드폰 번호 (ex: 010-1234-5678)', max_length=140, null=True)
+    birth_date = models.DateField('생일 (ex: 1990-07-14)', blank=True, null=True)
     is_active = models.BooleanField('사용중', default=True)
     date_joined = models.DateTimeField('가입일', default=timezone.now)
 
+    objects = UserManager()
       
     USERNAME_FIELD = 'email'                     # email을 사용자의 식별자로 설정
     REQUIRED_FIELDS = ['name']                   # 필수입력값
 
-    objects = UserManager()
     
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
         swappable = 'AUTH_USER_MODEL'
 
-    def email_user(self, subject, message, from_email=None, **kwargs): # 이메일 발송 메소드
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+    #def email_user(self, subject, message, from_email=None, **kwargs): # 이메일 발송 메소드
+    #    send_mail(subject, message, from_email, [self.email], **kwargs)

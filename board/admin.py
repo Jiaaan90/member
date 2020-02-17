@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import Article
+from .models import Article, Comment
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
@@ -16,4 +16,4 @@ class ArticleAdmin(admin.ModelAdmin):
     date_created.admin_order_field = 'created_at'             # date_created 컬럼 제목을 클릭시 실제 어떤 데이터를 기준으로 정렬할 지 결정
     date_created.short_description = '작성일'                   # date_created 컬럼 제목에 보일 텍스트
 
-
+admin.site.register(Comment)

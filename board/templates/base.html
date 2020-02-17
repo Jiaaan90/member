@@ -19,38 +19,45 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a href="/accounts/login/" style="text-decoration: none;"><p style="font-size:x-large; font-weight: bold; line-height: 50px;">Linuxwares</p></a>
+                    <a href="/article/create/" style="text-decoration: none;"><p style="font-size:xx-large; font-weight: bold; line-height: 50px;">Linuxwares</p></a>
                 <!--    <a class="navbar-brand" href="/article/">게시글 목록</a>-->
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
+                        {% if request.user.is_authenticated %}    
                         <li>
-                            <a style="font-size:15px; font-weight: bold; color: #337AB7" href="/article/">게시글</a>
+                            <a style="font-size:17px; font-weight: bold; color: #337AB7" href="/article/">게시글</a>
                         </li>
+                        {% endif %}
                         {% if not request.user.is_authenticated %}
                         <li>
-                            <a href="/accounts/create/" style="font-size:15px; font-weight: bold; color: #337AB7">가입하기</a>
+                            <a href="/accounts/create/" style="font-size:17px; font-weight: bold; color: #337AB7">가입하기</a>
                         </li>
                         {% endif %}
                         {% if request.user.is_authenticated %}
                         <li>
-                            <a href="/accounts/logout/" style="font-size:15px; font-weight: bold; color: #337AB7">로그아웃</a>
+                            <a href="/accounts/logout/" style="font-size:17px; font-weight: bold; color: #337AB7">로그아웃</a>
                         </li>   
-                        <li>              
-                            <a href="/accounts/update/" style="font-size:15px; font-weight: bold; color: #337AB7">마이페이지</a>
-                        </li>    
-                        {% else %}
+                        <!--<li>              
+                            <a href="" style="font-size:15px; font-weight: bold; color: #337AB7">마이페이지</a>    
+                        </li>-->
+                            {% else %}
                         <li>    
-                            <a href="/accounts/login/" style="font-size:15px; font-weight: bold; color: #337AB7">로그인</a>
+                            <a href="/accounts/login/" style="font-size:17px; font-weight: bold; color: #337AB7">로그인</a>
                         {% endif %} 
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        {% if not request.user.is_authenticated %}
+        <div class="alert alert-info" style="text-align: center; font-weight: bold;" >리눅스웨어에 오신걸 환영합니다. ^^ <br>( 1월 입사한 신입사원이 면접자를 위해 만든 게시판 으로 오류가 발생 할 수 있습니다. )</div>
+        
+        {% endif %}
+
         {% if messages %}
             {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert" style="text-align: center;">
               {{ message }}
             </div>
             {% endfor %}

@@ -61,10 +61,11 @@
 </div>
 {% endif %}
 {% if request.user.is_authenticated %}
+<div class="alert alert-info" style="text-align: center;">{{user.name}} 님 환영합니다. ^^</div>
 <div class="panel panel-default registration">
     <div class="panel-heading">
         <!--{% load staticfiles %}-->
-        <p id="logo">Linuxwares<br>{{user.name}}<br> 환영합니다</p>
+        <p id="logo">Linuxwares<br></p>
         <!--<img src="/member/static/img/logo.png" alt="Linuxwares"/> 안됨?-->
     </div>
     <div class="panel-body">

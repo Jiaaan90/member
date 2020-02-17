@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>댓글 수정</title>{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+    .wrapper{
+        margin: auto;
+        width: 700px;
+    }
+</style>
+{% endblock css %}
+{% block content %}
+<div class=wrapper>
+    <h4>Update Comment</h4>
+    <form action="." method = "POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-xs" style="float: right;">댓 글 수 정</button>
+</form>
+</div>
+{% endblock %}

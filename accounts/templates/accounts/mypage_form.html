@@ -41,21 +41,10 @@
     </div>
     <div class="panel-body">
         <form action="." method="post">
-            {% csrf_token %}
-            {% for field in form %}
-                <div class="form-group {% if field.errors|length > 0 %}has-error{%endif %}">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    <input name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form-control" type="{{ field.field.widget.input_type }}" value="{{ field.value|default_if_none:'' }}">
-                    {% for error in field.errors %}
-                        <label class="control-label" for="{{ field.id_for_label }}">{{ error }}</label>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-            <div class="form-actions">
-                <button class="btn btn-primary btn-large" type="submit">정 보 수 정</button><br>
-            </div>
+         
+            <button class="btn btn-primary btn-large" type="submit">회 원 탈 퇴</button><br>
         </form>
-        <button class="btn btn-primary btn-large" onclick="location.href='/accounts/login'">회 원 탈 퇴</button>
     </div>
 </div>
 {% endblock content %}
+

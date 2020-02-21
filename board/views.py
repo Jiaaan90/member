@@ -27,6 +27,7 @@ from django.shortcuts import render
 
 DEFAULT_ARTICLE = 62
 
+
 #댓글
 #화면이동
 #한페이지 내에서 잘 안됨
@@ -100,17 +101,17 @@ class ArticleListView(TemplateView):         # 게시글 목록
     #template_name = 'base.html'
     template_name = 'article_list.html'       #뷰 전용 템플릿 생성 , 상속받아서 이렇게 쓰면됨
     #queryset = Article.objects.all()         # 모든 게시글
-    #pk_url_kwargs = 'article_id'
+    #pk_url_kwargs = 'article_id' 
     
     def get_object(self, queryset=None):
         queryset = queryset or self.queryset     # queryset 파라미터 초기화
         pk = self.kwargs.get(self.pk_url_kwargs) # pk는 모델에서 정의된 pk값, 즉 모델의 id
         return queryset.get(pk=pk)    # pk로 검색된 데이터가 있다면 그 중 첫번째 데이터 없다면 None 반환
     
-
     def get(self, request, *args, **kwargs):
-       #article = self.get_object()
-       #페이징
+       
+        #페이징
+        #article = get_object_or_404(Article, pk=pk)
         PAGE_ROW_COUNT=15
         PAGE_DISPLAY_COUNT=5
         total_list=  Article.objects.all().exclude(pk=DEFAULT_ARTICLE)
@@ -118,9 +119,8 @@ class ArticleListView(TemplateView):         # 게시글 목록
         pageNum=request.GET.get('pageNum')
         totalPageCount=paginator.num_pages # 전체 페이지 갯수 
 
-
-        if not request.user.is_authenticated():
-            return redirect('/article/create/')             # url aritle 막기
+        #if not request.user.is_authenticated():
+        #    return redirect('/article/create/')             # url aritle 막기
         
         try:
             article_list=paginator.page(pageNum)
@@ -128,12 +128,11 @@ class ArticleListView(TemplateView):         # 게시글 목록
             article_list=paginator.page(1)
             pageNum=1
         except EmptyPage:
-
             article_list=paginator.page(paginator.num_pages)
             pageNum=paginator.num_pages
 
         pageNum=int(pageNum)
-        startPageNum=1+((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT
+        startPageNum=1+((pageNum-1)//PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT
         endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1
         
         if totalPageCount < endPageNum:
@@ -141,17 +140,8 @@ class ArticleListView(TemplateView):         # 게시글 목록
             
         bottomPages=range(startPageNum, endPageNum+1)
    
-        #댓글
-     #  comment = Comment()
-        #if request.method == 'POST':
-    #    comment.text = request.POST['text']
-        #    comment.post = Article.objects.get(pk=request.POST['post']) # id로 객체 가져오기        
-        #    comment.author = request.user.username
-        #    comment.save()
-        #    print(type(comment))
         print(article_list)
-       
-
+   
         ctx = {
             #'view': self.__class__.__name__, # 클래스의 이름
             #'data': self.queryset            # 검색 결과
@@ -165,19 +155,15 @@ class ArticleListView(TemplateView):         # 게시글 목록
             #'post': post,
             #'form': form
             #'comment' : comment
-
             #'comment' : comments
-        
         }        
-        #article = self.get_object()
-    
         try:
-            comments = Comment.objects.filter(post=id)
+            comments = Comment.objects.filter(pk=articles)
             ctx['comments'] = comments
-           
+            print(comments)   
         except:
+            print('pass')
             pass
-            
         return self.render_to_response(ctx)
     
     ##없어도 됨
@@ -202,6 +188,7 @@ class ArticleListView(TemplateView):         # 게시글 목록
             self.queryset = Article.objects.all()
         return self.queryset
     '''
+
 class ArticleDetailView(TemplateView):
     #template_name = 'base.html'
     template_name = 'article_detail.html'
@@ -236,7 +223,6 @@ class ArticleDetailView(TemplateView):
         except:
             pass
             # 흘리기
-
 
         #post = get_object_or_404(Post, pk=pk)    
         #if request.method == "POST":
@@ -287,7 +273,7 @@ class ArticleCreateUpdateView(TemplateView):  # 게시글 추가, 수정
     template_name = 'article_update.html'
     queryset = Article.objects.all()
     pk_url_kwargs = 'article_id'
-    
+
     def get_object(self, queryset=None):
         queryset = queryset or self.queryset
         pk = self.kwargs.get(self.pk_url_kwargs)

@@ -16,7 +16,6 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 
 from django.shortcuts import render
-
 #def index_view(request):                                                       -> 바로 url 넘기는 방법 
 #    return HttpResponseRedirect('/accounts/login/')
 

@@ -26,15 +26,14 @@ SECRET_KEY = '*ht)4)itqdw9+i41e7y*4(qgnr@-yu9db!xq6lgp*(l!_67%%r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.20.58"]
-
+ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
-
-    'board',
+    
     'accounts',
+    'board',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_summernote',
-    'mathfilters'
+    'mathfilters',
+    
 ]
 
 MIDDLEWARE = [
@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'board.databasemiddleware.
 ]
 
 ROOT_URLCONF = 'member.urls'
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'member.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,8 +84,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'NAME' : '/tmp/member.db',
     }
 }
+
+
+
 
 
 # Password validation
@@ -122,7 +127,6 @@ USE_TZ = False              #기본 시간대(UTC)를 사용 안하겠다고 변
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_URL = '/static/' 
 STATICFILES_DIRS = [ 

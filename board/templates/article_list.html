@@ -58,7 +58,7 @@
             {% for article in articles %}         <!-- for tag 시작 -->
             <tr onclick="location.href='/article/{{ article.pk }}/'"> <!--테이블 행 클릭시 url로 이동 -->
                 <td style="width: 50px;">{{ article.pk }}</td>
-                <td>{{ article.title }} </td><!--<a href="" style="color: black;"> [  {{ post.comments.count }}  ]</a>-->
+                <td>{{ article.title }} <a href="" style="color: black;"> [  {{ comments.count }}  ]</a></td>
                 <td style="width: 200px;">{{ article.author }}</td>
                 <td style="width: 200px;">{{ article.created_at}}</td>
                 <td style="width: 100px;">{{ article.article_hit }}</td>

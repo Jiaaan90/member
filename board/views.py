@@ -57,22 +57,6 @@ def add_comment_to_post(request, pk):
 
 ########댓글 수정 삭제##########
 class CommentUpdate(UpdateView): 
-    # asdasdasdasd
-    # asdasdasd
-    # asdasdasd
-    # asdasd
-    # asdasd
-    #a asdasdasdasdasdasd
-    #asdasdasd
-    # asdasasdasd
-    #/asdaasdasdasdasd
-    #1q23123123123
-    #123123
-
-    ###asdasdasdasd
-    #123123
-    #123
-    #123123
     model = Comment
     #fields = ['text']
     form_class = CommentForm

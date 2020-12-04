@@ -64,7 +64,7 @@ class CommentUpdate(UpdateView):
     template_name = 'comment_update.html'
     article = Article()
     # success_url = '/'
-
+    # qwerqwerqwer
     def dispatch(self, request, *args, **kwargs):
         object = self.get_object()
         if object.author != request.user:

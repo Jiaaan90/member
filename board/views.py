@@ -56,7 +56,7 @@ def add_comment_to_post(request, pk):
 
 
 ########댓글 수정 삭제##########
-class CommentUpdate(UpdateView): 
+class CommentUpdate(UpdateView):
     model = Comment
     #fields = ['text']
     form_class = CommentForm
@@ -70,6 +70,7 @@ class CommentUpdate(UpdateView):
             return HttpResponseRedirect('/')
             # 삭제 페이지에서 권한이 없다! 라고 띄우거나
             # detail페이지로 들어가서 삭제에 실패했습니다. 라고 띄우거나
+            #123123123123
         
         if request.method == "POST":
             form = CommentForm(request.POST, instance=self.get_object())

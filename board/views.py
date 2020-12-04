@@ -31,7 +31,7 @@ DEFAULT_ARTICLE = 62
 #화면이동
 #한페이지 내에서 잘 안됨
 def post_create(request):
-    
+    # asdasdasdasd
     return render(request, 'article_comment.html')
 
 def index_get(request):

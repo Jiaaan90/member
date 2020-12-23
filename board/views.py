@@ -71,6 +71,7 @@ class CommentUpdate(UpdateView):
             # 삭제 페이지에서 권한이 없다! 라고 띄우거나
             # detail페이지로 들어가서 삭제에 실패했습니다. 라고 띄우거나
             #123123123123
+            #asdasd
         
         if request.method == "POST":
             form = CommentForm(request.POST, instance=self.get_object())
